@@ -23,6 +23,7 @@ def readLoop(sc):
     s.write(rc)
     payload = readSensor()
     concentration = payload[1] * 256 + payload[2]
+    temp = payload[3]-40
     data.append(concentration)
     data.pop(0)
     plt.plot(data)
@@ -30,6 +31,7 @@ def readLoop(sc):
     plt.xticks([0, 90, 180, 270, 360], ('-60', '-45', '-30', '-15', '0') )
     plt.xlabel('time, m')
     plt.grid(True)
+    plt.title('temp: ' + str(temp) + 'C, last: ' + str(concentration) + 'ppm')
     plt.savefig(path +'/conc.png', fmt='png')
     plt.clf()
 
